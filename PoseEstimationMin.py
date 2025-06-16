@@ -4,7 +4,7 @@ import time
 
 myPose= mp.solutions.pose
 pose= myPose.Pose()
-cap = cv2.VideoCapture("PoseVideos/5.mp4")
+cap = cv2.VideoCapture("PoseVideos/4.mp4")
 pTime = 0
 mpDraw= mp.solutions.drawing_utils
 
