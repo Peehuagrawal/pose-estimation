@@ -2,12 +2,23 @@ import cv2
 import mediapipe as mp
 import time
 
-
-cap = cv2.VideoCapture("PoseVideos/1.mp4")
+myPose= mp.solutions.pose
+pose= myPose.Pose()
+cap = cv2.VideoCapture("PoseVideos/5.mp4")
 pTime = 0
+mpDraw= mp.solutions.drawing_utils
+
 
 while True:
     success, img = cap.read()
+    imgRGB= cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    results= pose.process(imgRGB)
+    print(results.pose_landmarks)
+    if results.pose_landmarks:
+        mpDraw.draw_landmarks(img, results.pose_landmarks, myPose.POSE_CONNECTIONS)
+        for id, lm in enumerate(results.pose_landmarks.landmark):
+            h,w,c=img.shape
+            print(id, lm)
 
     if not success or img is None:
         print("Video has ended. Press any key to exit.")
@@ -25,7 +36,7 @@ while True:
     cv2.imshow("Image", img)
 
     # Break on 'q' key
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cap.release()
