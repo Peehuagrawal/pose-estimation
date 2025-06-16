@@ -24,7 +24,7 @@ class poseDetector():
     def findPose(self, img, draw=True):
         imgRGB= cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results= self.pose.process(imgRGB)
-        print(results.pose_landmarks)
+        #print(results.pose_landmarks)
         if draw:
             if results.pose_landmarks:
                 self.mpDraw.draw_landmarks(img, results.pose_landmarks, self.myPose.POSE_CONNECTIONS)
